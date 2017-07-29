@@ -36,6 +36,7 @@ export default class MovieDetailComponent extends Component {
 
   _renderScrollViewContent() {
     const data = Array.from({length: 30});
+    console.tron.log(this.props.movie)
     return (
       <View style={{    marginTop: HEADER_MAX_HEIGHT}}>
         {data.map((_, i) =>

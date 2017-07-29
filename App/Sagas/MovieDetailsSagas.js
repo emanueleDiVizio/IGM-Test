@@ -20,7 +20,7 @@ export function * getMovieDetails (api, action) {
   const { id } = action
   // make the call to the api
   const response = yield call(api.getMovieDetails, id)
-
+  console.tron.log(response)
   // success?
   if (response.ok) {
 
