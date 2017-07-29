@@ -4,17 +4,22 @@ import {connect} from 'react-redux'
 // Add Actions - replace 'Your' with whatever your reducer is called :)
 // import YourActions from '../Redux/YourRedux'
 
-import MoviesList from '../Components/MoviesList'
+import SearchMovieActions from '../Redux/SearchMovieRedux'
+import MovieDetailsActions from '../Redux/MovieDetailsRedux'
+
+import MoviesList from '../Components/MoviesListSecond'
 import {Header, Grid, Row, List, ListItem} from 'react-native-elements'
 
 // Styles
 import styles from './Styles/MovieSearchScreenStyle'
 
-const movies = [{title: "KEWBAB", image: "http://lorempixel.com/400/200/", caption:" ALLAHU KEBABA"}, {title: "KEWBAB", image: "http://lorempixel.com/400/200/", caption:" ALLAHU KEBABA"}]
 
 import SearchHeaderComponent from 'react-native-search-header';
 
 const SearchHeaderView = SearchHeaderComponent();
+
+
+
 
 class MovieSearchScreen extends Component {
   render() {
@@ -31,24 +36,14 @@ class MovieSearchScreen extends Component {
                         this.searchHeader = searchHeader;
                     }}
           statusHeightOffet = { 0 }
-          onGetSearchAutocompletions = {async (text) => {
-                        if (text) {
-                            const response = await fetch(`http://suggestqueries.google.com/complete/search?client=firefox&q=${text}`, {
-                                method: `get`
-                            });
-                            const data = await response.json();
-                            return data[1];
-                        } else {
-                            return [];
-                        }
-                    }}
+          onSearchChange={(event) => this.props.searchMovie(event.nativeEvent.text)}
         />
         </View>
 
 
 
         <View style={{flex: 9.5}}>
-          <MoviesList movies={movies}/>
+          <MoviesList movies={this.props.movies} onSelectMovie={this.props.goToMovie}/>
         </View>
       </View>
     )
@@ -56,11 +51,17 @@ class MovieSearchScreen extends Component {
 }
 
 const mapStateToProps = (state) => {
-  return {}
+  return {
+    nav: state.nav,
+    movies: state.searchMovie.movies
+  }
 }
 
 const mapDispatchToProps = (dispatch) => {
-  return {}
+  return {
+    searchMovie: (movie) => dispatch(SearchMovieActions.searchMovieRequest(movie)),
+    goToMovie: (movie) => dispatch(MovieDetailsActions.movieDetailsRequest(movie))
+  }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(MovieSearchScreen)

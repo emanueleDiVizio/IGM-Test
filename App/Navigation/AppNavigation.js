@@ -13,7 +13,7 @@ const PrimaryNav = StackNavigator({
 }, {
   // Default config for all screens
   headerMode: 'none',
-  initialRouteName: 'MovieDetailScreen',
+  initialRouteName: 'MovieSearchScreen',
   navigationOptions: {
     headerStyle: styles.header
   }

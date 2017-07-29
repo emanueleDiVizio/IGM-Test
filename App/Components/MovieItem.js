@@ -20,10 +20,11 @@ export default class MovieItem extends Component {
     return (
       <View style={styles.container}>
         <Tile
-          imageSrc={{uri: (this.props.movie.image)}}
+          imageSrc={{uri: (this.props.movie.poster)}}
           title={this.props.movie.title}
           featured
-          caption={this.props.movie.caption}
+          caption={this.props.movie.overview}
+          onPress={() => this.props.onSelect(this.props.movie.id)}
         />
       </View>
     )

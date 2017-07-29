@@ -1,4 +1,4 @@
-import { takeLatest } from 'redux-saga/effects'
+import { takeLatest, throttle } from 'redux-saga/effects'
 import API from '../Services/Api'
 import FixtureAPI from '../Services/FixtureApi'
 import DebugConfig from '../Config/DebugConfig'
@@ -6,12 +6,16 @@ import DebugConfig from '../Config/DebugConfig'
 /* ------------- Types ------------- */
 
 import { StartupTypes } from '../Redux/StartupRedux'
-import { GithubTypes } from '../Redux/GithubRedux'
+import { MovieDetailsTypes } from '../Redux/MovieDetailsRedux'
+import { SearchMovieTypes } from '../Redux/SearchMovieRedux'
+import { ConfigTypes } from '../Redux/ConfigRedux'
 
 /* ------------- Sagas ------------- */
 
 import { startup } from './StartupSagas'
-import { getUserAvatar } from './GithubSagas'
+import { getMovieDetails } from './MovieDetailsSagas'
+import { searchMovie } from './SearchMovieSagas'
+import { getConfig } from './ConfigSagas'
 
 /* ------------- API ------------- */
 
@@ -25,8 +29,9 @@ export default function * root () {
   yield [
     // some sagas only receive an action
     takeLatest(StartupTypes.STARTUP, startup),
-
     // some sagas receive extra parameters in addition to an action
-    takeLatest(GithubTypes.USER_REQUEST, getUserAvatar, api)
+    takeLatest(MovieDetailsTypes.MOVIE_DETAILS_REQUEST, getMovieDetails, api),
+    throttle(200, SearchMovieTypes.SEARCH_MOVIE_REQUEST, searchMovie, api),
+    takeLatest(ConfigTypes.CONFIG_REQUEST, getConfig, api)
   ]
 }
