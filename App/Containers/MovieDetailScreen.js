@@ -19,6 +19,7 @@ class MovieDetailScreen extends Component {
 
 const mapStateToProps = (state) => {
   return {
+    nav: state.nav
   }
 }
 
