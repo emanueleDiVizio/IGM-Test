@@ -12,14 +12,16 @@ import MovieDetailComponent from '../Components/MovieDetailComponent'
 class MovieDetailScreen extends Component {
   render () {
     return (
-      <MovieDetailComponent/>
+      <MovieDetailComponent movie={this.props.movie}/>
     )
   }
 }
 
 const mapStateToProps = (state) => {
   return {
-    nav: state.nav
+    nav: state.nav,
+    movie: state.movieDetails.movie
+
   }
 }
 

@@ -7,7 +7,7 @@ import {connect} from 'react-redux'
 import SearchMovieActions from '../Redux/SearchMovieRedux'
 import MovieDetailsActions from '../Redux/MovieDetailsRedux'
 
-import MoviesList from '../Components/MoviesListSecond'
+import MoviesList from '../Components/MoviesList'
 import {Header, Grid, Row, List, ListItem} from 'react-native-elements'
 
 // Styles
