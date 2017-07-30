@@ -14,7 +14,9 @@ import { call, put, select } from 'redux-saga/effects'
 import MovieDetailsActions from '../Redux/MovieDetailsRedux'
 import AppNavigation from '../Navigation/AppNavigation'
 
+import buildVideoObject from '../Transforms/BuildVideoObject'
 
+export const selectConfig = (state) => state.config.data
 
 export function * getMovieDetails (api, action) {
   const { id } = action
@@ -24,10 +26,11 @@ export function * getMovieDetails (api, action) {
   // success?
   if (response.ok) {
 
+    const config = yield select(selectConfig)
 
     // You might need to change the response here - do this with a 'transform',
     // located in ../Transforms/. Otherwise, just pass the data back from the api.
-    yield put(MovieDetailsActions.movieDetailsSuccess(response.data))
+    yield put(MovieDetailsActions.movieDetailsSuccess(buildVideoObject(response.data, config)))
     yield put(AppNavigation.router.getActionForPathAndParams('MovieDetailScreen'))
   } else {
     yield put(MovieDetailsActions.movieDetailsFailure())

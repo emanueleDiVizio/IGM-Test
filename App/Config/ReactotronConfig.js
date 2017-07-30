@@ -11,7 +11,11 @@ if (Config.useReactotron) {
     .useReactNative()
     .use(reduxPlugin({ onRestore: Immutable }))
     .use(sagaPlugin())
-    .connect()
+    .connect({
+      enabled: true,
+      host: '192.168.0.136',  // server ip
+      port: 9090
+    })
 
   // Let's clear Reactotron on every time we load the app
   Reactotron.clear()

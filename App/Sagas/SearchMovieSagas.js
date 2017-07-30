@@ -14,12 +14,7 @@ import { call, put, select } from 'redux-saga/effects'
 import SearchMovieActions from '../Redux/SearchMovieRedux'
 import buildMoviesList from '../Transforms/BuildMoviesList'
 
-export const selectBaseUrl = (state) => {
-  console.tron.log(state)
-
-  return state.config.data.images.base_url
-}
-export const selectSize = (state) => state.config.data.images.poster_sizes[4]
+export const selectConfig = (state) => state.config.data
 
 export function * searchMovie (api, action) {
   const { data } = action
@@ -31,11 +26,10 @@ export function * searchMovie (api, action) {
     // success?
     if (response.ok) {
 
-      const base_url = yield select(selectBaseUrl)
-      const size = yield select(selectSize)
+      const config = yield select(selectConfig)
       // You might need to change the response here - do this with a 'transform',
       // located in ../Transforms/. Otherwise, just pass the data back from the api.
-      yield put(SearchMovieActions.searchMovieSuccess(buildMoviesList(response.data, base_url, size)))
+      yield put(SearchMovieActions.searchMovieSuccess(buildMoviesList(response.data, config)))
     } else {
       yield put(SearchMovieActions.searchMovieFailure())
     }
