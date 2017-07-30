@@ -1,18 +1,30 @@
-import React, { Component } from 'react'
-import { ScrollView, Text, KeyboardAvoidingView } from 'react-native'
-import { connect } from 'react-redux'
+import React, {Component} from 'react'
+import {ScrollView, Text, KeyboardAvoidingView} from 'react-native'
+import {connect} from 'react-redux'
 // Add Actions - replace 'Your' with whatever your reducer is called :)
 // import YourActions from '../Redux/YourRedux'
 
 // Styles
 import styles from './Styles/MovieDetailScreenStyle'
 
-import MovieDetailComponent from '../Components/MovieDetailComponent'
+import CollapsingHeaderScrollView from '../Components/CollapsingHeaderScrollView'
+import MovieDetailsContent from '../Components/MovieDetailsContent'
+import MovieDetailsHeader from '../Components/MovieDetailsHeader'
+import AppNavigation from '../Navigation/AppNavigation'
 
 class MovieDetailScreen extends Component {
-  render () {
+  render() {
     return (
-      <MovieDetailComponent movie={this.props.movie}/>
+      <CollapsingHeaderScrollView
+
+        header={<MovieDetailsHeader movie={this.props.movie} onBack={this.props.back}/>}
+
+        content={<MovieDetailsContent movie={this.props.movie}/>}
+
+
+
+      >
+        </CollapsingHeaderScrollView>
     )
   }
 }
@@ -27,6 +39,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
+    back: () => dispatch(AppNavigation.router.getActionForPathAndParams('MovieSearchScreen'))
   }
 }
 

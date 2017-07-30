@@ -4,12 +4,12 @@ import {connect} from 'react-redux'
 
 // For empty lists
 import AlertMessage from '../Components/AlertMessage'
-import MovieItem from '../Components/MovieItem'
+import CastItem from '../Components/CastItem'
 
 // Styles
 import styles from './Styles/MoviesListStyle'
 
-export default class MoviesList extends Component {
+export default class CastList extends Component {
   state: {
     dataSource: Object
   }
@@ -29,7 +29,7 @@ export default class MoviesList extends Component {
 
     // Datasource is always in state
     this.state = {
-      dataSource: ds.cloneWithRows(props.movies)
+      dataSource: ds.cloneWithRows(props.cast)
     }
   }
 
@@ -41,30 +41,10 @@ export default class MoviesList extends Component {
    * e.g.
    return <MyCustomCell title={rowData.title} description={rowData.description} />
    *************************************************************/
-  renderRow(movie, onSelect) {
+  renderRow(member, onSelect) {
     return (
-      <MovieItem movie={movie} onSelect={onSelect}/>
+      <CastItem castMember={member} onSelect={onSelect}/>
     )
-  }
-
-  /* ***********************************************************
-   * STEP 4
-   * If your datasource is driven by Redux, you'll need to
-   * reset it when new data arrives.
-   * DO NOT! place `cloneWithRows` inside of render, since render
-   * is called very often, and should remain fast!  Just replace
-   * state's datasource on newProps.
-   *
-   * e.g.
-
-   *************************************************************/
-
-  componentWillReceiveProps(newProps) {
-    if (newProps.movies) {
-      this.setState(prevState => ({
-        dataSource: prevState.dataSource.cloneWithRows(newProps.movies)
-      }))
-    }
   }
 
   // Used for friendly AlertMessage
@@ -73,14 +53,15 @@ export default class MoviesList extends Component {
     return this.state.dataSource.getRowCount() === 0
   }
 
-
   render() {
     return (
       <View style={styles.container}>
         <ListView
+
+          horizontal={true}
           contentContainerStyle={styles.listContent}
           dataSource={this.state.dataSource}
-          renderRow={(movie) => this.renderRow(movie, this.props.onSelectMovie)}
+          renderRow={(member) => this.renderRow(member, this.props.onSelectCast)}
           enableEmptySections
           pageSize={15}
         />
