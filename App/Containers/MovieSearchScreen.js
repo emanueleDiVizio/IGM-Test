@@ -37,6 +37,7 @@ class MovieSearchScreen extends Component {
                     }}
           statusHeightOffet = { 0 }
           onSearchChange={(event) => this.props.searchMovie(event.nativeEvent.text)}
+          onSearch={(event) => this.props.searchMovie(event.nativeEvent.text)}
         />
         </View>
 
