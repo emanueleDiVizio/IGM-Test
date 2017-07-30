@@ -19,8 +19,8 @@ export default class CastItem extends Component {
     return (
       <View style={styles.container}>
         <Image style={styles.image} source={{uri: this.props.castMember.profile_path}}/>
-        <Text style={styles.character}>{this.props.castMember.role}</Text>
-        <Text style={styles.name}>{this.props.castMember.name}</Text>
+        <Text style={styles.character}>{this.props.castMember.name}</Text>
+        <Text style={styles.name}>{this.props.castMember.character}</Text>
       </View>
     )
   }
