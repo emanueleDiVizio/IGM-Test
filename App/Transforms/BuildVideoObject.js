@@ -32,6 +32,7 @@ export default (movie: Object, config: Object, isFav: boolean) => {
     rating: movie.vote_average,
     title: movie.original_title,
     overview: movie.overview,
-    favorite: isFav
+    favorite: isFav,
+    trailerId: movie.videos.results[0].key
   }
 }
