@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 // import PropTypes from 'prop-types';
 import { View, Text } from 'react-native'
+import { Icon } from 'react-native-elements'
 import styles from './Styles/MoviesHomeComponentStyle'
 function buildState(props){
   return {
@@ -55,7 +56,19 @@ export default class MoviesHomeComponent extends Component {
         {this.state.displayMovies ?
           (this.state.fetching ? <Text>Fetching...</Text> : <MoviesList movies={ this.state.movies} onSelectMovie={props.goToMovie}/>)
           : this.state.displayFavorites ?
-            <MoviesList movies={ this.state.favorites} onSelectMovie={props.goToMovie}/> : <Text>NYou have no favorites</Text>}
+            <MoviesList movies={ this.state.favorites} onSelectMovie={props.goToMovie}/> :
+        <View style={styles.noFavs}>
+          <Icon
+            containerStyle={styles.icon}
+            size={64}
+            name='ghost'
+            type='material-community'
+            color='#808080'
+          />
+          <Text style={styles.noFavText}>You have no favorite movies yet!{"\n"}
+          Quick, push the search button and find some movies!</Text>
+
+        </View>}
 
       </View>
     )
