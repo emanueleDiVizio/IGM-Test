@@ -7,7 +7,7 @@ import {connect} from 'react-redux'
 import SearchMovieActions from '../Redux/SearchMovieRedux'
 import MovieDetailsActions from '../Redux/MovieDetailsRedux'
 
-import MoviesList from '../Components/MoviesList'
+import MoviesHomeComponent from '../Components/MoviesHomeComponent'
 import {Header, Grid, Row, List, ListItem} from 'react-native-elements'
 
 // Styles
@@ -27,7 +27,7 @@ class MovieSearchScreen extends Component {
       <View style={{flex: 1, justifyContent: "flex-start"}}>
         <View style={{flex: 1}}><Header
           rightComponent={{icon: "search", onPress: () => this.searchHeader.show(), color: "#fff"}}
-          centerComponent={{ text: 'Best Movies', style: { color: '#fff' } }}
+          centerComponent={{ text: 'Your favorite movies', style: { color: '#fff' } }}
           backgroundColor="#43b1ff"
           innerContainerStyles={{ height: 56}}
           outerContainerStyles={{height: 56}}
@@ -38,13 +38,14 @@ class MovieSearchScreen extends Component {
           statusHeightOffet = { 0 }
           onSearchChange={(event) => this.props.searchMovie(event.nativeEvent.text)}
           onSearch={(event) => this.props.searchMovie(event.nativeEvent.text)}
+          onHidden={() => this.props.stopSearch()}
         />
         </View>
 
 
 
         <View style={{flex: 9.5}}>
-          <MoviesList movies={this.props.movies} onSelectMovie={this.props.goToMovie}/>
+          <MoviesHomeComponent isSearching={this.props.isSearching} favorites={this.props.favorites} movies={this.props.movies} goToMovie={this.props.goToMovie}/>
         </View>
       </View>
     )
@@ -54,14 +55,18 @@ class MovieSearchScreen extends Component {
 const mapStateToProps = (state) => {
   return {
     nav: state.nav,
-    movies: state.searchMovie.movies
+    movies: state.searchMovie.movies,
+    favorites: state.favorites.movies,
+    isSearching: state.searchMovie.searching
+
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
     searchMovie: (movie) => dispatch(SearchMovieActions.searchMovieRequest(movie)),
-    goToMovie: (movie) => dispatch(MovieDetailsActions.movieDetailsRequest(movie))
+    goToMovie: (movie) => dispatch(MovieDetailsActions.movieDetailsRequest(movie)),
+    stopSearch: () => dispatch(SearchMovieActions.stopSearching())
   }
 }
 

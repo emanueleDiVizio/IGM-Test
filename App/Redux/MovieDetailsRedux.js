@@ -6,7 +6,8 @@ import Immutable from 'seamless-immutable'
 const { Types, Creators } = createActions({
   movieDetailsRequest: ['id'],
   movieDetailsSuccess: ['payload'],
-  movieDetailsFailure: null
+  movieDetailsFailure: null,
+  toggleFavorite: null
 })
 
 export const MovieDetailsTypes = Types
@@ -37,10 +38,15 @@ export const success = (state, action) => {
 export const failure = state =>
   state.merge({ fetching: false, error: true, payload: null })
 
+
+export const toggleFavorite = state =>
+  state.updateIn(["movie", "favorite"], fav => !fav);
+
 /* ------------- Hookup Reducers To Types ------------- */
 
 export const reducer = createReducer(INITIAL_STATE, {
   [Types.MOVIE_DETAILS_REQUEST]: request,
   [Types.MOVIE_DETAILS_SUCCESS]: success,
-  [Types.MOVIE_DETAILS_FAILURE]: failure
+  [Types.MOVIE_DETAILS_FAILURE]: failure,
+  [Types.TOGGLE_FAVORITE]: toggleFavorite
 })

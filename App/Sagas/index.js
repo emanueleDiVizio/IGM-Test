@@ -9,6 +9,7 @@ import { StartupTypes } from '../Redux/StartupRedux'
 import { MovieDetailsTypes } from '../Redux/MovieDetailsRedux'
 import { SearchMovieTypes } from '../Redux/SearchMovieRedux'
 import { ConfigTypes } from '../Redux/ConfigRedux'
+import { AddToFavoritesTypes } from '../Redux/AddToFavoritesRedux'
 
 /* ------------- Sagas ------------- */
 
@@ -16,6 +17,7 @@ import { startup } from './StartupSagas'
 import { getMovieDetails } from './MovieDetailsSagas'
 import { searchMovie } from './SearchMovieSagas'
 import { getConfig } from './ConfigSagas'
+import { addToFavorites } from './AddToFavoritesSagas'
 
 /* ------------- API ------------- */
 
@@ -32,6 +34,7 @@ export default function * root () {
     // some sagas receive extra parameters in addition to an action
     takeLatest(MovieDetailsTypes.MOVIE_DETAILS_REQUEST, getMovieDetails, api),
     throttle(200, SearchMovieTypes.SEARCH_MOVIE_REQUEST, searchMovie, api),
-    takeLatest(ConfigTypes.CONFIG_REQUEST, getConfig, api)
+    takeLatest(ConfigTypes.CONFIG_REQUEST, getConfig, api),
+    takeLatest(AddToFavoritesTypes.ADD_TO_FAVORITES_REQUEST, addToFavorites, api)
   ]
 }

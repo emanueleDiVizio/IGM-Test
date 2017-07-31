@@ -18,7 +18,7 @@ export const selectConfig = (state) => state.config.data
 
 export function * searchMovie (api, action) {
   const { data } = action
-  if(data.split(/\s+/).length > 1){
+  if(data.length > 2){
 
     // make the call to the api
     const response = yield call(api.searchMovie, data)
