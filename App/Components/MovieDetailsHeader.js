@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 // import PropTypes from 'prop-types';
-import {View, Text, Animated, Image} from 'react-native'
+import {View, Text, Animated, Image, Platform} from 'react-native'
 import styles from './Styles/MovieDetailsHeaderStyle'
 import {HEADER_MAX_HEIGHT, HEADER_MIN_HEIGHT, HEADER_SCROLL_DISTANCE} from './Styles/MovieDetailComponentStyle'
 import {Icon, Grid, Row} from 'react-native-elements'
@@ -82,7 +82,7 @@ export default class MovieDetailsHeader extends Component {
               onError={e => console.tron.log(e)}
               play={false}
               showFullscreenButton={true}
-              controls={0}
+              controls={(Platform.OS === 'ios') ? 0 : 2}
               showinfo={false}
               style={styles.video}
             />
