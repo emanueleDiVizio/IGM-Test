@@ -20,3 +20,10 @@ const PrimaryNav = StackNavigator({
 })
 
 export default PrimaryNav
+
+
+export const Actions = {
+  back: {
+    type: "Navigation/BACK"
+  }
+}

@@ -50,8 +50,8 @@ export default class MovieDetailsContent extends Component {
             />
             <View style={{flexDirection: 'row', marginTop: 8}}>
 
-              <Icon name='share'  color="#43B1FF" reverse raised size={16}/>
-              <Icon name='favorite'  color="#43B1FF" reverse raised size={16}/>
+              <Icon name='share'  color="#43B1FF" reverse raised size={16} onPress={this.props.onShare}/>
+              <Icon name='favorite' color="#43B1FF" reverseColor={this.props.movie.favorite ? "#fff542" : "#FFFFFF"} reverse raised size={16} onPress={this.props.onAddToFavorite}/>
 
             </View>
           </View>

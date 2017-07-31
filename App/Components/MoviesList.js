@@ -28,6 +28,7 @@ export default class MoviesList extends Component {
     const ds = new ListView.DataSource({rowHasChanged})
 
     // Datasource is always in state
+    console.tron.log(props.movies)
     this.state = {
       dataSource: ds.cloneWithRows(props.movies)
     }
