@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {View, Text, KeyboardAvoidingView} from 'react-native'
+import {View, Text, KeyboardAvoidingView, Platform} from 'react-native'
 import {connect} from 'react-redux'
 // Add Actions - replace 'Your' with whatever your reducer is called :)
 // import YourActions from '../Redux/YourRedux'
@@ -27,15 +27,15 @@ class MovieSearchScreen extends Component {
       <View style={{flex: 1, justifyContent: "flex-start"}}>
         <View style={{flex: 1}}><Header
           rightComponent={{icon: "search", onPress: () => this.searchHeader.show(), color: "#fff"}}
-          centerComponent={{ text: 'Favorite Movies', style: { color: '#fff' } }}
+          centerComponent={{ text: 'FAVORITE MOVIES', style: { color: '#fff' } }}
           backgroundColor="#43b1ff"
-          innerContainerStyles={{ height: 56}}
-          outerContainerStyles={{height: 56}}
+          innerContainerStyles={(Platform.OS === 'ios') ? {} : { height: 56}}
+          outerContainerStyles={(Platform.OS === 'ios')  ? {} :{height: 56}}
         /><SearchHeaderView
           ref = {(searchHeader) => {
                         this.searchHeader = searchHeader;
                     }}
-          statusHeightOffet = { 0 }
+          statusHeightOffet = { (Platform.OS === 'ios') ? 21 : 0}
           onSearchChange={(event) => this.props.searchMovie(event.nativeEvent.text)}
           onSearch={(event) => this.props.searchMovie(event.nativeEvent.text)}
           onHidden={() => this.props.stopSearch()}
@@ -44,7 +44,7 @@ class MovieSearchScreen extends Component {
 
 
 
-        <View style={{flex: 9.5}}>
+        <View style={(Platform.OS === 'ios') ? {flex: 8.6} : {flex: 9.5}}>
           <MoviesHomeComponent isSearching={this.props.isSearching} favorites={this.props.favorites} movies={this.props.movies} goToMovie={this.props.goToMovie}/>
         </View>
       </View>
