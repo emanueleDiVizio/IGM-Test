@@ -1,5 +1,6 @@
 // a library to wrap and simplify api calls
 import apisauce from 'apisauce'
+import Secrets from 'react-native-config'
 
 // our "constructor"
 const create = (baseURL = 'https://api.themoviedb.org/3/') => {
@@ -21,7 +22,7 @@ const create = (baseURL = 'https://api.themoviedb.org/3/') => {
   })
 
   api.addRequestTransform(request => {
-    request.params['api_key'] = '167fe5194d44b21860b407b2d771e8e0'
+    request.params['api_key'] = Secrets.API_KEY
   });
 
   // ------

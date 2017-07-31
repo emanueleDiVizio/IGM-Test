@@ -8,6 +8,9 @@ import YouTube from 'react-native-youtube'
 
 import Config from '../Config/AppConfig'
 
+import Secrets from 'react-native-config'
+
+
 export default class MovieDetailsHeader extends Component {
   // // Prop type warnings
   // static propTypes = {
@@ -72,15 +75,15 @@ export default class MovieDetailsHeader extends Component {
             <YouTube
               videoId={this.props.movie.trailerId}   // The YouTube video ID
               fullscreen={false}       // control whether the video should play in fullscreen or inline
-              apiKey={Config.youTubeApiKey}
+              apiKey={Secrets.YOUTUBE_KEY}
               onReady={e => console.tron.log(e)}
               onChangeState={e => console.tron.log(e)}
               onChangeQuality={e => console.tron.log(e)}
               onError={e => console.tron.log(e)}
               play={false}
               showFullscreenButton={true}
-              controls={2}
-              showinfo={true}
+              controls={0}
+              showinfo={false}
               style={styles.video}
             />
 
