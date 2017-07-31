@@ -39,5 +39,9 @@ export default StyleSheet.create({
     width: null,
     height: HEADER_MAX_HEIGHT,
     resizeMode: 'cover',
+  },
+  video: {
+    height: HEADER_MAX_HEIGHT,
+    alignSelf: 'stretch'
   }
 })
