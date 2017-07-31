@@ -27,7 +27,7 @@ class MovieSearchScreen extends Component {
       <View style={{flex: 1, justifyContent: "flex-start"}}>
         <View style={{flex: 1}}><Header
           rightComponent={{icon: "search", onPress: () => this.searchHeader.show(), color: "#fff"}}
-          centerComponent={{ text: 'Your favorite movies', style: { color: '#fff' } }}
+          centerComponent={{ text: 'Favorite Movies', style: { color: '#fff' } }}
           backgroundColor="#43b1ff"
           innerContainerStyles={{ height: 56}}
           outerContainerStyles={{height: 56}}
